@@ -1,5 +1,4 @@
 import useWeather from '../hooks/useWeather';
-import { FiSearch } from 'react-icons/fi';
 import { ITab, Tabs } from './ui/Tabs';
 import SearchForm from './SearchForm';
 
