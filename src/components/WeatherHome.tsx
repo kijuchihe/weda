@@ -1,6 +1,7 @@
 import useWeather from '../hooks/useWeather';
 import { FiSearch } from 'react-icons/fi';
 import { ITab, Tabs } from './ui/Tabs';
+import SearchForm from './SearchForm';
 
 const tabs: ITab[] = [{ header: 'Today', content: 'Today is a sunny day' }];
 
@@ -19,22 +20,7 @@ const WeatherHome = ({
   return (
     <section>
       <h1 className="text-2xl font-semibold text-center">Weda!</h1>
-      <div className="mx-auto w-fit">
-        <form
-          action=""
-          className="flex items-center w-[400px] gap-4 bg-gray-700 py-2 px-4 rounded-full border-2 border-transparent focus-within:border-blue-500 focus-within:border-2"
-        >
-          <input
-            type="text"
-            placeholder="Seach a city's weather"
-            className="flex-1 bg-transparent border-none outline-none placeholder:text-gray-200"
-          />
-          <button aria-label="search" type="submit">
-            <FiSearch />
-          </button>
-        </form>
-      </div>
-
+      <SearchForm />
       {loading ? (
         <>Loading...</>
       ) : (
