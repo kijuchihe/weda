@@ -70,15 +70,17 @@ const sidebarLinks: { to: string; name: string; logo: any; badge?: any }[] = [
   },
 ];
 
-const Sidebar = () => {
+const Sidebar = ({ showSidebar }: { showSidebar: boolean }) => {
   return (
     <>
       <aside
         id="logo-sidebar"
-        className="fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform -translate-x-full bg-gray-200 border-r border-gray-200 sm:translate-x-0 dark:bg-gray-900 dark:border-gray-700"
+        className={`fixed top-0 left-0 z-40 w-64 -translate-x-full h-screen pt-20 transition-transform  bg-gray-200 border-r border-gray-200 sm:translate-x-0 dark:bg-gray-900 dark:border-gray-700 ${
+          showSidebar && 'translate-x-0'
+        }`}
         aria-label="Sidebar"
       >
-        <div className="h-full px-3 pb-4 overflow-y-auto bg-gray-200 dark:bg-gray-900">
+        <div className="overflow-y-auto px-3 pb-4 h-full bg-gray-200 dark:bg-gray-900">
           <ul className="space-y-2 font-medium">
             {sidebarLinks.map((link, index) => (
               <li key={index}>
@@ -87,7 +89,7 @@ const Sidebar = () => {
                   className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
                 >
                   {link.logo}
-                  <span className="ms-3 flex-1 whitespace-nowrap">
+                  <span className="flex-1 whitespace-nowrap ms-3">
                     {link.name}
                   </span>
                 </NavLink>

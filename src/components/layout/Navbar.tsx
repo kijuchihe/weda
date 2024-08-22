@@ -1,16 +1,20 @@
-const Navbar = () => {
+const Navbar = ({
+  setShowSidebar,
+}: {
+  setShowSidebar: React.Dispatch<React.SetStateAction<boolean>>;
+}) => {
   return (
     <>
       <nav className="fixed top-0 z-50 w-full bg-gray-200 border-b border-gray-200 dark:bg-gray-900 dark:border-gray-700 h-[60px]">
         <div className="px-3 py-3 lg:px-5 lg:pl-3">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center justify-start rtl:justify-end">
+          <div className="flex justify-between items-center">
+            <div className="flex justify-start items-center rtl:justify-end">
               <button
-                data-drawer-target="logo-sidebar"
-                data-drawer-toggle="logo-sidebar"
-                aria-controls="logo-sidebar"
                 type="button"
                 className="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                onClick={() => {
+                  setShowSidebar((prev) => !prev);
+                }}
               >
                 <span className="sr-only">Open sidebar</span>
                 <svg
@@ -28,12 +32,8 @@ const Navbar = () => {
                 </svg>
               </button>
               <a href="/" className="flex ms-2 md:me-24">
-                <img
-                  src="/logo.png"
-                  className="h-10"
-                  alt="Wedar Logo"
-                />
-                <span className="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">
+                <img src="/logo.png" className="h-10" alt="Wedar Logo" />
+                <span className="self-center text-xl font-semibold whitespace-nowrap sm:text-2xl dark:text-white">
                   Wedar
                 </span>
               </a>
@@ -56,7 +56,7 @@ const Navbar = () => {
                   </button>
                 </div>
                 <div
-                  className="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600"
+                  className="hidden z-50 my-4 text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600"
                   id="dropdown-user"
                 >
                   <div className="px-4 py-3" role="none">
