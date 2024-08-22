@@ -1,5 +1,8 @@
 import useWeather from '../hooks/useWeather';
 import { FiSearch } from 'react-icons/fi';
+import { ITab, Tabs } from './ui/Tabs';
+
+const tabs: ITab[] = [{ header: 'Today', content: 'Today is a sunny day' }];
 
 const WeatherHome = ({
   latitude,
@@ -12,11 +15,11 @@ const WeatherHome = ({
     latitude,
     longitude,
   });
-  console.log(weather);
+  // if (!weather) return <>Fetching ...</>
   return (
     <section>
       <h1 className="text-2xl font-semibold text-center">Weda!</h1>
-      <div className="w-fit mx-auto">
+      <div className="mx-auto w-fit">
         <form
           action=""
           className="flex items-center w-[400px] gap-4 bg-gray-700 py-2 px-4 rounded-full border-2 border-transparent focus-within:border-blue-500 focus-within:border-2"
@@ -24,7 +27,7 @@ const WeatherHome = ({
           <input
             type="text"
             placeholder="Seach a city's weather"
-            className="flex-1 bg-transparent placeholder:text-gray-200 border-none outline-none"
+            className="flex-1 bg-transparent border-none outline-none placeholder:text-gray-200"
           />
           <button aria-label="search" type="submit">
             <FiSearch />
@@ -54,49 +57,7 @@ const WeatherHome = ({
               <h3 className="text-6xl">{weather.current.temp_c} &#8451;</h3>
             </div>
           </div>
-          {/* Tabs */}
-          <div className="text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700">
-            <ul className="flex flex-wrap -mb-px">
-              <li className="me-2">
-                <a
-                  href="#"
-                  className="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
-                >
-                  Profile
-                </a>
-              </li>
-              <li className="me-2">
-                <a
-                  href="#"
-                  className="inline-block p-4 text-blue-600 border-b-2 border-blue-600 rounded-t-lg active dark:text-blue-500 dark:border-blue-500"
-                  aria-current="page"
-                >
-                  Dashboard
-                </a>
-              </li>
-              <li className="me-2">
-                <a
-                  href="#"
-                  className="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
-                >
-                  Settings
-                </a>
-              </li>
-              <li className="me-2">
-                <a
-                  href="#"
-                  className="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
-                >
-                  Contacts
-                </a>
-              </li>
-              <li>
-                <a className="inline-block p-4 text-gray-400 rounded-t-lg cursor-not-allowed dark:text-gray-500">
-                  Disabled
-                </a>
-              </li>
-            </ul>
-          </div>
+          <Tabs tabs={tabs} />
         </div>
       )}
     </section>

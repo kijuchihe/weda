@@ -7,14 +7,15 @@ function App() {
 
   return (
     <Layout>
-      {location.longitude ? (
+      {location?.longitude ? (
         <WeatherHome
-          latitude={location.latitude}
-          longitude={location.longitude}
+          latitude={location?.latitude}
+          longitude={location?.longitude}
         />
       ) : (
         <>Fetching</>
       )}
+      
     </Layout>
   );
 }

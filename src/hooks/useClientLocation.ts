@@ -6,7 +6,10 @@ export interface ILocation {
 }
 
 function useClientLocation(): ILocation {
-  const [location, setLocation] = useState<ILocation | null>(null);
+  const [location, setLocation] = useState<ILocation>({
+    latitude: 0,
+    longitude: 0,
+  });
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
@@ -22,11 +25,7 @@ function useClientLocation(): ILocation {
     );
   }, []);
 
-  if (location) return location;
-  return {
-    latitude: 0,
-    longitude: 0,
-  };
+  return location;
 }
 
 export default useClientLocation;
