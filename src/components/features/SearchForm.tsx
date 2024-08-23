@@ -55,7 +55,7 @@ const SearchForm = () => {
     <div className="relative mx-auto w-fit">
       <form
         action=""
-        className="flex items-center w-[400px] gap-4 bg-gray-200 dark:bg-gray-700 py-2 px-4 rounded-full border-2 border-transparent focus-within:border-blue-500 focus-within:border-2"
+        className="flex items-center w-[300px] md:w-[400px] gap-4 bg-gray-200 dark:bg-gray-700 py-2 px-4 rounded-full border-2 border-transparent focus-within:border-blue-500 focus-within:border-2"
         onSubmit={handleSubmit}
       >
         <input
