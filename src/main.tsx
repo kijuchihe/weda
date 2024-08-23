@@ -5,6 +5,7 @@ import App from './App.tsx';
 import './index.css';
 import WeatherResults from './components/pages/Search.tsx';
 import Settings from './components/pages/Settings.tsx';
+import Login from './components/pages/Login.tsx';
 
 const ErrorBoundary = () => {
   return (
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
   {
     path: '/settings',
     element: <Settings />,
+  },
+  {
+    path: '/login',
+    element: <Login />,
   },
 ]);
 

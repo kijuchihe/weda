@@ -24,7 +24,7 @@ const SearchForm = () => {
     const options = {
       method: 'GET',
       headers: {
-        'x-rapidapi-key': 'e6d19a3739msh53938220f885404p113e5ajsn11ed19d0cb54',
+        'x-rapidapi-key': import.meta.env.VITE_API_KEY as string,
         'x-rapidapi-host': 'weatherapi-com.p.rapidapi.com',
       },
     };
@@ -32,7 +32,6 @@ const SearchForm = () => {
     try {
       const response = await fetch(url, options);
       const result = await response.json();
-      console.log(result);
       setData(result);
     } catch (error) {
       console.error(error);
@@ -56,13 +55,13 @@ const SearchForm = () => {
     <div className="relative mx-auto w-fit">
       <form
         action=""
-        className="flex items-center w-[400px] gap-4 bg-gray-700 py-2 px-4 rounded-full border-2 border-transparent focus-within:border-blue-500 focus-within:border-2"
+        className="flex items-center w-[400px] gap-4 bg-gray-200 dark:bg-gray-700 py-2 px-4 rounded-full border-2 border-transparent focus-within:border-blue-500 focus-within:border-2"
         onSubmit={handleSubmit}
       >
         <input
           type="text"
           placeholder="Seach a city's weather"
-          className="flex-1 bg-transparent border-none outline-none placeholder:text-gray-200"
+          className="flex-1 bg-transparent border-none outline-none dark:placeholder:text-gray-200 placeholder:text-gray-700"
           value={query}
           onChange={handleChange}
         />
@@ -70,13 +69,17 @@ const SearchForm = () => {
           <FiSearch />
         </button>
       </form>
-      <div className="absolute w-full left-0 top-[50px]">
+      <div
+        className="absolute w-full left-0 top-[50px]"
+        // onBlur={() => setData([])}
+        // onAbort={() => setData([])}
+      >
         {data.length > 0 && (
-          <div className="p-2 mt-2 bg-gray-800 rounded-xl">
+          <div className="p-2 mt-2 bg-gray-200 rounded-xl dark:bg-gray-800">
             {data?.map((city: any) => {
               return (
                 <div
-                  className="p-2 my-1 rounded-xl cursor-pointer hover:bg-gray-900"
+                  className="p-2 my-1 rounded-xl cursor-pointer hover:bg-gray-300 dark:hover:bg-gray-900"
                   onClick={() => {
                     setQuery(`${city.name}, ${city.region}, ${city.country}`);
                     setData([]);

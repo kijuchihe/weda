@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 const options = {
   method: 'GET',
   headers: {
-    'x-rapidapi-key': 'e6d19a3739msh53938220f885404p113e5ajsn11ed19d0cb54',
+    'x-rapidapi-key': import.meta.env.VITE_API_KEY as string,
     'x-rapidapi-host': 'weatherapi-com.p.rapidapi.com',
   },
 };
@@ -20,7 +20,7 @@ function useWeather({
   let url = `https://weatherapi-com.p.rapidapi.com/current.json?q=${latitude}%2C${longitude}`;
   if (latitude && longitude) {
     url = `https://weatherapi-com.p.rapidapi.com/current.json?q=${latitude}%2C${longitude}`;
-  } else {
+  } else if (q) {
     url = `https://weatherapi-com.p.rapidapi.com/current.json?q=${q}`;
   }
   const [weather, setWeather] = useState<any>(null);
@@ -29,6 +29,13 @@ function useWeather({
 
   useEffect(() => {
     async function getWeather() {
+      // To make sure the user inputs a location and a seach isn't done if no location is given
+      if (!(latitude && longitude) && !q?.length) {
+        setWeather(null);
+        setLoading(false);
+        return;
+      }
+
       setLoading(true);
       try {
         const response = await fetch(url, options);

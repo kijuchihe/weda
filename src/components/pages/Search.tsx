@@ -17,69 +17,66 @@ const tabs: ITab[] = [
 ];
 
 const WeatherResults = () => {
-  let weather: any = null;
-  let loading = true;
   let query = useQuery();
-  if (query.get('lat') && query.get('lon')) {
-    const { weather: wet, loading: load } = useWeather({
-      latitude: Number(query.get('lat')!),
-      longitude: Number(query.get('lon')!),
-    });
-    weather = wet;
-    loading = load;
-  } else if (query.get('q')) {
-    const { weather: wet, loading: load } = useWeather({
-      q: query.get('q')!,
-    });
-    weather = wet;
-    loading = load;
-  }
+  const { weather, loading } = useWeather({
+    latitude: Number(query.get('lat')!),
+    longitude: Number(query.get('lon')!),
+    q: query.get('q')!,
+  });
+  const hasParameters = (): boolean => {
+    if ((query.get('lat') && query.get('lon')) || query.get('q')) {
+      return true;
+    }
+    return false;
+  };
   return (
     <Layout>
       <section>
         <h1 className="text-2xl font-semibold text-center">Wedar!</h1>
         <SearchForm />
 
-        {query.get('q') ||
-          (query.get('lat') && query.get('lon') && (
-            <>
-              {loading ? (
-                <>Loading...</>
-              ) : (
-                <>
-                  {weather && (
-                    <div>
-                      <div className="flex flex-wrap gap-8">
-                        <div className="w-full md:w-[45%] text-center md:text-start">
-                          <h3 className="text-6xl">{weather?.location.name}</h3>
-                          <h3>
-                            Time:{' '}
-                            {new Date(
-                              weather?.location.localtime
-                            ).toLocaleDateString()}
-                          </h3>
-                          <img
-                            src={weather?.current.condition.icon}
-                            alt="Weather"
-                            className="w-[300px]"
-                          />
-                          <p className="text-sm">
-                            {weather.current.condition.text}
-                          </p>
-                        </div>
-                        <div className="w-full md:w-[45%]">
-                          <h3 className="text-6xl text-center">
-                            {weather.current.temp_c} &#8451;
-                          </h3>
-                        </div>
+        {hasParameters() && (
+          <>
+            {loading ? (
+              <>Loading...</>
+            ) : (
+              <>
+                {weather && (
+                  <div>
+                    <div className="flex flex-wrap gap-8">
+                      <div className="w-full md:w-[45%] text-center md:text-start">
+                        <h3 className="text-6xl">
+                          {weather?.location.name}, {weather?.location.country}
+                        </h3>
+                        <br />
+                        <h3>
+                          Time:{' '}
+                          {new Date(
+                            weather?.location.localtime
+                          ).toLocaleDateString()}
+                        </h3>
+                        <img
+                          src={weather?.current.condition.icon}
+                          alt="Weather"
+                          className="w-[300px]"
+                        />
+                        <p className="text-sm">
+                          {weather.current.condition.text}
+                        </p>
                       </div>
-                      <Tabs tabs={tabs} />
+                      <div className="w-full md:w-[45%]">
+                        <h3 className="text-6xl text-center">
+                          {weather.current.temp_c} &#8451;
+                        </h3>
+                      </div>
                     </div>
-                  )}
-                </>
-              )}
-            </>
-          ))}
+                    <Tabs tabs={tabs} />
+                  </div>
+                )}
+              </>
+            )}
+          </>
+        )}
       </section>
     </Layout>
   );

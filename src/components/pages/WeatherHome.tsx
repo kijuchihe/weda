@@ -12,6 +12,10 @@ const tabs: ITab[] = [
     content: 'We no get money to pay for this feature. Lmao',
   },
   { header: 'Future', content: 'Na who get money go see the future' },
+  {
+    header: 'Suggested Activities',
+    content: 'The api that we used did not have this feature',
+  },
 ];
 
 const WeatherHome = ({
@@ -27,7 +31,7 @@ const WeatherHome = ({
   });
 
   return (
-    <section>
+    <section className="p-4 h-full min-h-screen">
       <h1 className="text-2xl font-semibold text-center">Wedar!</h1>
       <SearchForm />
       {loading ? (
@@ -37,6 +41,12 @@ const WeatherHome = ({
           <div className="flex flex-wrap gap-8">
             <div className="w-full md:w-[45%] text-center md:text-start">
               <h3 className="text-6xl">Lagos</h3>
+              <small>Current Location</small>
+              <br />
+              <br />
+              <hr />
+              <br />
+              <br />
               <h3>
                 Time:{' '}
                 {new Date(weather.location.localtime).toLocaleDateString()}

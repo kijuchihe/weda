@@ -1,7 +1,7 @@
 import React from 'react';
 export interface ITab {
   header: string;
-  content: string;
+  content: string | React.ReactNode;
 }
 export const Tabs = ({ tabs }: { tabs: ITab[] }) => {
   const [current, setCurrent] = React.useState(0);
@@ -80,7 +80,7 @@ export const TabContent = ({
   id,
   current,
 }: {
-  content: string;
+  content: string | React.ReactNode;
   id: number;
   current: number;
 }) => {
