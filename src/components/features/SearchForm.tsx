@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 // import useSearch from '../hooks/useSearch';
 import { FiSearch } from 'react-icons/fi';
+import { useNavigate } from 'react-router-dom';
 
 interface ISearchLocation {
   country: string;
@@ -15,6 +16,7 @@ interface ISearchLocation {
 const SearchForm = () => {
   const [data, setData] = useState<ISearchLocation[]>([]);
   const [query, setQuery] = useState<string>('');
+  const navigate = useNavigate();
 
   const useSearch = async (query: string) => {
     // const [data, setData] = useState<any>(null);
@@ -43,11 +45,19 @@ const SearchForm = () => {
     setQuery(e.target.value);
     e.target.value.length > 1 ? useSearch(e.target.value) : setData([]);
   };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setData([]);
+    navigate(`/search?q=${query}`);
+    setQuery('');
+  };
   return (
-    <div className="mx-auto w-fit">
+    <div className="relative mx-auto w-fit">
       <form
         action=""
         className="flex items-center w-[400px] gap-4 bg-gray-700 py-2 px-4 rounded-full border-2 border-transparent focus-within:border-blue-500 focus-within:border-2"
+        onSubmit={handleSubmit}
       >
         <input
           type="text"
@@ -60,7 +70,7 @@ const SearchForm = () => {
           <FiSearch />
         </button>
       </form>
-      <div>
+      <div className="absolute w-full left-0 top-[50px]">
         {data.length > 0 && (
           <div className="p-2 mt-2 bg-gray-800 rounded-xl">
             {data?.map((city: any) => {
@@ -70,7 +80,9 @@ const SearchForm = () => {
                   onClick={() => {
                     setQuery(`${city.name}, ${city.region}, ${city.country}`);
                     setData([]);
+                    navigate(`/search?lat=${city.lat}&lon=${city.lon}`);
                   }}
+                  key={city.id}
                 >
                   {city.name}, {city.region}, {city.country}
                 </div>

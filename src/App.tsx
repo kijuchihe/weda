@@ -1,6 +1,6 @@
 import Layout from './components/layout';
 import useClientLocation, { ILocation } from './hooks/useClientLocation';
-import WeatherHome from './components/WeatherHome';
+import WeatherHome from './components/pages/WeatherHome';
 
 function App() {
   const location: ILocation = useClientLocation();
@@ -13,9 +13,8 @@ function App() {
           longitude={location?.longitude}
         />
       ) : (
-        <>Fetching</>
+        <>Getting Location...</>
       )}
-      
     </Layout>
   );
 }

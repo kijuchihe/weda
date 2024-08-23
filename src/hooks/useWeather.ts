@@ -11,11 +11,18 @@ const options = {
 function useWeather({
   latitude,
   longitude,
+  q,
 }: {
-  latitude: number;
-  longitude: number;
+  latitude?: number;
+  longitude?: number;
+  q?: string;
 }) {
-  const url = `https://weatherapi-com.p.rapidapi.com/current.json?q=${latitude}%2C${longitude}`;
+  let url = `https://weatherapi-com.p.rapidapi.com/current.json?q=${latitude}%2C${longitude}`;
+  if (latitude && longitude) {
+    url = `https://weatherapi-com.p.rapidapi.com/current.json?q=${latitude}%2C${longitude}`;
+  } else {
+    url = `https://weatherapi-com.p.rapidapi.com/current.json?q=${q}`;
+  }
   const [weather, setWeather] = useState<any>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<any>(null);
@@ -35,7 +42,7 @@ function useWeather({
       }
     }
     getWeather();
-  }, []);
+  }, [latitude, longitude, q]);
   return { weather, loading, error };
 }
 

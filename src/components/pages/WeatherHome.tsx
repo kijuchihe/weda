@@ -1,6 +1,6 @@
-import useWeather from '../hooks/useWeather';
-import { ITab, Tabs } from './ui/Tabs';
-import SearchForm from './SearchForm';
+import useWeather from '../../hooks/useWeather';
+import { ITab, Tabs } from '../ui/Tabs';
+import SearchForm from '../features/SearchForm';
 
 const tabs: ITab[] = [
   {

@@ -3,6 +3,8 @@ import { createRoot } from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import App from './App.tsx';
 import './index.css';
+import WeatherResults from './components/pages/Search.tsx';
+import Settings from './components/pages/Settings.tsx';
 
 const ErrorBoundary = () => {
   return (
@@ -17,6 +19,14 @@ const router = createBrowserRouter([
     path: '/',
     element: <App />,
     errorElement: <ErrorBoundary />,
+  },
+  {
+    path: '/search',
+    element: <WeatherResults />,
+  },
+  {
+    path: '/settings',
+    element: <Settings />,
   },
 ]);
 
