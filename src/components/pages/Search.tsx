@@ -40,39 +40,46 @@ const WeatherResults = () => {
         <h1 className="text-2xl font-semibold text-center">Wedar!</h1>
         <SearchForm />
 
-        {loading ? (
-          <>Loading...</>
-        ) : (
-          <>
-            {weather && (
-              <div>
-                <div className="flex flex-wrap gap-8">
-                  <div className="w-full md:w-[45%] text-center md:text-start">
-                    <h3 className="text-6xl">{weather?.location.name}</h3>
-                    <h3>
-                      Time:{' '}
-                      {new Date(
-                        weather?.location.localtime
-                      ).toLocaleDateString()}
-                    </h3>
-                    <img
-                      src={weather?.current.condition.icon}
-                      alt="Weather"
-                      className="w-[300px]"
-                    />
-                    <p className="text-sm">{weather.current.condition.text}</p>
-                  </div>
-                  <div className="w-full md:w-[45%]">
-                    <h3 className="text-6xl text-center">
-                      {weather.current.temp_c} &#8451;
-                    </h3>
-                  </div>
-                </div>
-                <Tabs tabs={tabs} />
-              </div>
-            )}
-          </>
-        )}
+        {query.get('q') ||
+          (query.get('lat') && query.get('lon') && (
+            <>
+              {loading ? (
+                <>Loading...</>
+              ) : (
+                <>
+                  {weather && (
+                    <div>
+                      <div className="flex flex-wrap gap-8">
+                        <div className="w-full md:w-[45%] text-center md:text-start">
+                          <h3 className="text-6xl">{weather?.location.name}</h3>
+                          <h3>
+                            Time:{' '}
+                            {new Date(
+                              weather?.location.localtime
+                            ).toLocaleDateString()}
+                          </h3>
+                          <img
+                            src={weather?.current.condition.icon}
+                            alt="Weather"
+                            className="w-[300px]"
+                          />
+                          <p className="text-sm">
+                            {weather.current.condition.text}
+                          </p>
+                        </div>
+                        <div className="w-full md:w-[45%]">
+                          <h3 className="text-6xl text-center">
+                            {weather.current.temp_c} &#8451;
+                          </h3>
+                        </div>
+                      </div>
+                      <Tabs tabs={tabs} />
+                    </div>
+                  )}
+                </>
+              )}
+            </>
+          ))}
       </section>
     </Layout>
   );
