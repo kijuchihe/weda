@@ -1,6 +1,4 @@
 import { useEffect, useState } from 'react';
-// import { Switch } from '@headlessui/react';
-// import { SunIcon } from '@heroicons/react/24/solid';
 import { FiSun as SunIcon } from 'react-icons/fi';
 import { useLocalStorage } from 'usehooks-ts';
 import Switch from '../ui/Switch';
@@ -17,10 +15,10 @@ function ThemeSwitch() {
     document.body.classList.add(theme);
   }, [theme]);
 
-  const [enabled, setEnabled] = useState(theme == 'light');
+  const [enabled, setEnabled] = useState(theme == 'dark');
 
   const handleThemeChange = (enabled: boolean) => {
-    setTheme(enabled ? 'light' : 'dark');
+    setTheme(enabled ? 'dark' : 'light');
     setEnabled(enabled);
   };
 

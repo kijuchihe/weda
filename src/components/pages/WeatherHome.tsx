@@ -1,22 +1,14 @@
 import useWeather from '../../hooks/useWeather';
 import { ITab, Tabs } from '../ui/Tabs';
 import SearchForm from '../features/SearchForm';
-
-const tabs: ITab[] = [
-  {
-    header: 'Hourly Report',
-    content: 'The api that we used did not have this feature',
-  },
-  {
-    header: 'History',
-    content: 'We no get money to pay for this feature. Lmao',
-  },
-  { header: 'Future', content: 'Na who get money go see the future' },
-  {
-    header: 'Suggested Activities',
-    content: 'The api that we used did not have this feature',
-  },
-];
+import {
+  FaCloud,
+  FaCompass,
+  FaTemperatureHigh,
+  FaWater,
+  FaWind,
+} from 'react-icons/fa';
+import { FaU } from 'react-icons/fa6';
 
 const WeatherHome = ({
   latitude,
@@ -29,6 +21,63 @@ const WeatherHome = ({
     latitude,
     longitude,
   });
+  const itemClassName =
+    'bg-gray-300 w-[120px] h-[120px] dark:bg-gray-800 rounded-xl p-4 flex items-center gap-2 justify-center flex-col hover:scale-105 transition-transform duration-300 ease-in-out cursor-pointer';
+  const tabs: ITab[] = [
+    {
+      header: 'Other details',
+      content: (
+        <>
+          {weather ? (
+            <div className="grid grid-cols-5 gap-4">
+              <div className={itemClassName} title="Feels Like">
+                <FaTemperatureHigh className="w-5 h-5 text-red-500" />
+                <h3>{weather.current.feelslike_c} &#8451;</h3>
+              </div>
+              <div className={itemClassName}>
+                <FaWind className="w-5 h-5 text-blue-200" />
+                <div>
+                  <h3>{weather.current.wind_kph} km/h</h3>
+                  <h3 className="flex gap-1 items-center">
+                    <FaCompass />
+                    {weather.current.wind_dir}
+                  </h3>
+                </div>
+              </div>
+
+              <div className={itemClassName}>
+                <FaWater className="w-5 h-5 text-blue-500" />
+                Humidity: {weather.current.humidity} %
+              </div>
+              <div className={itemClassName}>
+                <FaCloud className="w-5 h-5 text-blue-300" />
+                Cloud: {weather.current.cloud} %
+              </div>
+              <div className={itemClassName}>
+                <FaU className="w-5 h-5 text-purple-300" />
+                <h3>Pressure: {weather.current.pressure_mb} mb</h3>
+              </div>
+            </div>
+          ) : (
+            'No data'
+          )}
+        </>
+      ),
+    },
+    {
+      header: 'Hourly Report',
+      content: 'The api that we used did not have this feature',
+    },
+    {
+      header: 'History',
+      content: 'We no get money to pay for this feature. Lmao',
+    },
+    { header: 'Future', content: 'Na who get money go see the future' },
+    {
+      header: 'Suggested Activities',
+      content: 'The api that we used did not have this feature',
+    },
+  ];
 
   return (
     <section className="p-4 h-full min-h-screen">
