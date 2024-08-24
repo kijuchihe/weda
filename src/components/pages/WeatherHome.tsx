@@ -117,7 +117,7 @@ const WeatherHome = ({
                 {weather.current.temp_c} &#8451;
               </h3>
               <div>
-                <Map lng={weather.location.lon} lat={weather.location.lt} />
+                <Map lng={weather.location.lon} lat={weather.location.lat} />
               </div>
             </div>
           </div>

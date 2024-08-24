@@ -11,6 +11,7 @@ import SearchForm from '../features/SearchForm';
 import Layout from '../layout';
 import { ITab, Tabs } from '../ui/Tabs';
 import { FaU } from 'react-icons/fa6';
+import Map from '../features/Map';
 
 const WeatherResults = () => {
   let query = useQuery();
@@ -122,6 +123,12 @@ const WeatherResults = () => {
                           <FaTemperatureHigh className="w-10 h-10 text-red-500" />
                           {weather.current.temp_c} &#8451;
                         </h3>
+                        <div>
+                          <Map
+                            lng={weather.location.lon}
+                            lat={weather.location.lat}
+                          />
+                        </div>
                       </div>
                     </div>
                     <Tabs tabs={tabs} />

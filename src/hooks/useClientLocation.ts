@@ -5,13 +5,15 @@ export interface ILocation {
   longitude: number;
 }
 
-function useClientLocation(): ILocation {
+function useClientLocation(): { location: ILocation; loading: boolean } {
   const [location, setLocation] = useState<ILocation>({
     latitude: 0,
     longitude: 0,
   });
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
+    setLoading(true);
     navigator.geolocation.getCurrentPosition(
       (position) => {
         setLocation({
@@ -23,9 +25,10 @@ function useClientLocation(): ILocation {
         console.error('Error: ', error);
       }
     );
+    setLoading(false);
   }, []);
 
-  return location;
+  return { location, loading };
 }
 
 export default useClientLocation;

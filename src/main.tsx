@@ -3,7 +3,8 @@ import { createRoot } from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import './index.css';
-import 'mapbox-gl/dist/mapbox-gl.css';
+// import 'mapbox-gl/dist/mapbox-gl.css';
+import 'leaflet/dist/leaflet.css';
 // Pages
 import App from './App.tsx';
 import WeatherResults from './components/pages/Search.tsx';
@@ -27,14 +28,17 @@ const router = createBrowserRouter([
   {
     path: '/search',
     element: <WeatherResults />,
+    errorElement: <ErrorBoundary />,
   },
   {
     path: '/settings',
     element: <Settings />,
+    errorElement: <ErrorBoundary />,
   },
   {
     path: '/login',
     element: <Login />,
+    errorElement: <ErrorBoundary />,
   },
 ]);
 
