@@ -8,7 +8,7 @@ function classNames(...classes: string[]) {
 }
 
 function ThemeSwitch() {
-  const [theme, setTheme] = useLocalStorage('theme', 'light');
+  const [theme, setTheme] = useLocalStorage('theme', 'dark');
 
   useEffect(() => {
     document.body.classList.remove('light', 'dark');

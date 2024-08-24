@@ -1,8 +1,11 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import App from './App.tsx';
+
 import './index.css';
+import 'mapbox-gl/dist/mapbox-gl.css';
+// Pages
+import App from './App.tsx';
 import WeatherResults from './components/pages/Search.tsx';
 import Settings from './components/pages/Settings.tsx';
 import Login from './components/pages/Login.tsx';

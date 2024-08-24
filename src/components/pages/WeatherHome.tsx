@@ -9,6 +9,8 @@ import {
   FaWind,
 } from 'react-icons/fa';
 import { FaU } from 'react-icons/fa6';
+import Map from '../features/Map';
+import Spinner from '../ui/Spinner';
 
 const WeatherHome = ({
   latitude,
@@ -84,7 +86,9 @@ const WeatherHome = ({
       <h1 className="text-2xl font-semibold text-center">Wedar!</h1>
       <SearchForm />
       {loading ? (
-        <>Loading...</>
+        <>
+          <Spinner />
+        </>
       ) : (
         <div>
           <div className="flex flex-wrap gap-8">
@@ -112,6 +116,9 @@ const WeatherHome = ({
                 <FaTemperatureHigh className="w-10 h-10 text-red-500" />
                 {weather.current.temp_c} &#8451;
               </h3>
+              <div>
+                <Map lng={weather.location.lon} lat={weather.location.lt} />
+              </div>
             </div>
           </div>
           <Tabs tabs={tabs} />

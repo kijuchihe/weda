@@ -1,6 +1,7 @@
 import Layout from './components/layout';
 import useClientLocation, { ILocation } from './hooks/useClientLocation';
 import WeatherHome from './components/pages/WeatherHome';
+import Spinner from './components/ui/Spinner';
 
 function App() {
   const location: ILocation = useClientLocation();
@@ -13,7 +14,9 @@ function App() {
           longitude={location?.longitude}
         />
       ) : (
-        <>Getting Location...</>
+        <>
+          <Spinner />
+        </>
       )}
     </Layout>
   );
