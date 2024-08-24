@@ -118,7 +118,8 @@ const WeatherResults = () => {
                         </p>
                       </div>
                       <div className="w-full md:w-[45%]">
-                        <h3 className="text-6xl text-center">
+                        <h3 className="flex gap-2 items-center text-6xl text-center">
+                          <FaTemperatureHigh className="w-10 h-10 text-red-500" />
                           {weather.current.temp_c} &#8451;
                         </h3>
                       </div>
